@@ -20,8 +20,9 @@
     "typescript": "^3.7.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"yarn serve\"",
     "build": "react-scripts build",
+    "serve": "node ./api/app",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
