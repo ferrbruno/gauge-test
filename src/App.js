@@ -44,25 +44,34 @@ const buildChart = (users, interactions) => {
     chart: {
       type: "column"
     },
-    yAxis: {
-      title: {
-        text: "Interactions"
+    xAxis: {
+      type: "category",
+      labels: {
+        rotation: -45,
+        style: {
+          fontSize: "13px",
+          fontFamily: "Verdana, sans-serif"
+        }
       }
     },
-    xAxis: {
+    yAxis: {
+      allowDecimals: false,
       title: {
-        text: "Users"
+        text: "Interactions"
       }
     },
     title: {
       text: "User Interactions"
     },
-    series: result.map(({ userName, userInteractions: { length } }) => {
-      return {
-        name: userName,
-        data: [length]
-      };
-    }),
+    legend: {
+      enabled: false
+    },
+    series: [{
+      name: "Interactions",
+      data: result.map(({ userName, userInteractions: { length } }) => {
+        return [userName, length];
+      })
+    }],
     dataLabels: {
       enabled: true,
       rotation: -90,
