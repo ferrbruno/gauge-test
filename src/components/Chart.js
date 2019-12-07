@@ -5,14 +5,14 @@ import HighchartsReact from "highcharts-react-official";
 import { CircularProgress, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   container: {
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
     height: "calc(100vh - 84px)", // Respect header size
   }
-}));
+});
 
 export default function Chart({ users, interactions }) {
   const classes = useStyles();
@@ -30,8 +30,9 @@ export default function Chart({ users, interactions }) {
     });
 
     return { userName, userInteractions };
-  });
+  }).filter(({ userInteractions: { length } }) => length); // Remove users with no interactions.
 
+  // Descending order
   result.sort((a, b) => b.userInteractions.length - a.userInteractions.length);
 
   const options = {
@@ -56,7 +57,7 @@ export default function Chart({ users, interactions }) {
     xAxis: {
       type: "category",
       labels: {
-        rotation: -45,
+        rotation: -45, // Save some label space
         style: {
           fontSize: "13px",
           fontFamily: "Verdana, sans-serif"

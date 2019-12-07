@@ -27,6 +27,13 @@ const getData = async () => {
 export default function App() {
   const [users, setUsers] = useState();
   const [interactions, setInteractions] = useState();
+  const [filtered, setFiltered] = useState();
+
+  const onFilter = value => {
+    setFiltered(interactions.filter(({ brand }) => {
+      return value ? brand === value : true;
+    }));
+  };
 
   useEffect(() => {
     getData().then(({ users, interactions }) => {
@@ -38,8 +45,8 @@ export default function App() {
   return (
     <>
       <CssBaseline />
-      <NavBar />
-      <Chart users={users} interactions={interactions} />
+      <NavBar onFilter={onFilter} />
+      <Chart users={users} interactions={filtered || interactions} />
     </>
   );
 }

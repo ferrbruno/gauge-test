@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { AppBar, FormControl, FormHelperText, InputLabel, MenuItem, Select, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -16,7 +17,7 @@ const getBrands = async () => {
   return json;
 };
 
-export default function NavBar() {
+export default function NavBar({ onFilter }) {
   const classes = useStyles();
   const [brand, setBrand] = useState("");
   const [brandList, setBrandList] = useState("");
@@ -27,6 +28,7 @@ export default function NavBar() {
 
   const handleChange = ({ target: { value } }) => {
     setBrand(value);
+    onFilter(value);
   };
 
   return (
@@ -42,7 +44,7 @@ export default function NavBar() {
           >
             {brand && <MenuItem value="">None</MenuItem>}
             {brandList && brandList.map((item, index) => {
-              const { id, name, image } = item;
+              const { id, name } = item;
               return <MenuItem key={index} value={id}>{name}</MenuItem>;
             })}
           </Select>
@@ -52,3 +54,7 @@ export default function NavBar() {
     </AppBar>
   );
 }
+
+NavBar.propTypes = {
+  onFilter: PropTypes.func
+};
