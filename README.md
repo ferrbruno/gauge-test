@@ -9,11 +9,13 @@ Installs all dependencies.
 
 ### `yarn start`
 
-Runs the app in the development mode.<br />
+Runs the app in the development mode and initializes API.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+You can also open [http://localhost:8000](http://localhost:8000) to see the production build being served if you built the project.
 
 ### `yarn serve`
 
